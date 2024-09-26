@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 결과</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p {
+            text-indent: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .result-image {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-image">
+        <img src="https://i.postimg.cc/xC27NHCv/image.png" alt="상단 이미지">
+    </div>
+    
+    <div class="quiz-container">
+        <h2>나의 제주어 퀴즈 점수는?</h2><br>
+        <h4>
+            <p id="score-display">당신의 점수는 <strong>0</strong> 점입니다.</p>
+        </h4>
+        
+        <!-- 결과 이미지 -->
+        <img class="result-image" src="https://i.postimg.cc/1X4V37H3/001-2.png" alt="결과 이미지">
+        
+        <!-- 버튼 컨테이너 -->
+        <div class="button-container">
+            <a href="https://www.bridgeasia.net/bridging-issues/view.jsp?sno=1438">
+                <button>제주어 청원 보러가기</button>
+            </a>
+            <a href="https://www.woollimkorea.net/main.jsp">
+                <button>국내 청원 보러가기</button>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 하단 이미지 -->
+    <div class="bottom-image">
+        <img src="https://i.postimg.cc/7ZCYKvNB/image.png" alt="하단 이미지">
+    </div>
+
+    <script>
+        // 로컬 스토리지에서 점수를 불러옴
+        let score = parseInt(localStorage.getItem('score')) || 0;
+        let firstCorrect = localStorage.getItem('firstCorrect') === 'true'; // 첫 정답 여부 확인
+
+        // 점수 변환
+        let displayScore = 0;
+
+        if (score === 1) {
+            displayScore = 25;
+        } else if (score === 2) {
+            displayScore = 50;
+        } else if (score === 3) {
+            displayScore = 75;
+        } else if (score >= 4) {
+            displayScore = 100;
+        }
+
+        // 점수에 따른 문구
+        let message = '';
+
+        if (displayScore === 25) {
+            message = '순우리말 초보';
+        } else if (displayScore === 50) {
+            message = '순우리말과 친해지는 중';
+        } else if (displayScore === 75) {
+            message = '순우리말 애호가';
+        } else if (displayScore === 100) {
+            message = '제주어 달인';
+        } else {
+            message = '아직 정답을 맞추지 못하셨습니다!';
+        }
+
+        // 점수 결과 표시
+        document.getElementById('score-display').innerHTML = `당신의 점수는 <strong>${displayScore}</strong>점입니다. (${message})`;
+
+        // 필요시 퀴즈 종료 후 점수 초기화
+        // localStorage.removeItem('score'); // 주석 해제하면 점수 초기화 가능
+        // localStorage.removeItem('firstCorrect'); // 주석 해제하면 첫 정답 여부 초기화 가능
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 반크 한글날 제주어 퀴즈</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 상단 이미지 -->
+    <div class="top-image">
+        <img src="https://i.postimg.cc/xC27NHCv/image.png" alt="상단 이미지">
+    </div>
+
+    <div class="quiz-container">
+        <h2>문제를 풀고 제주어를 알아보아요!</h2><br>
+        <div id="quiz">
+            <div class="question-container">
+                <h3>문제 1. 성별 관계없이 어르신들을 부르는 호칭은 무엇일까요?</h3>
+                
+                <ul id="options"><br>
+                    <li><input type="radio" name="answer" value="A"> 1. 이모</li><br>
+                    <li><input type="radio" name="answer" value="B"> 2. 삼춘</li><br>
+                    <li><input type="radio" name="answer" value="C"> 3. 아방</li><br>
+
+                </ul>
+                <button id="submit">제출하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            const options = document.getElementsByName('answer');
+            let selectedAnswer;
+
+            // 사용자가 선택한 답을 확인
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedAnswer = options[i].value;
+                    break;
+                }
+            }
+
+            // 사용자가 답을 선택하지 않은 경우
+            if (!selectedAnswer) {
+                alert('답을 선택해 주세요!');
+                return;
+            }
+
+            // 로컬 스토리지에서 점수 확인 (firstCorrect 제거)
+            let score = parseInt(localStorage.getItem('score')) || 0;
+
+            // 정답 확인 ('A' 또는 'B'가 정답)
+            if (selectedAnswer === 'B') {
+                score += 1; // 정답 시 1점 추가
+                localStorage.setItem('score', score); // 점수 저장
+                alert('정답입니다!');
+                
+                // correct1.html로 이동
+                window.location.href = 'correct1.html';
+            } else {
+                alert('다시 한번 풀어볼까요?');
+            }
+        });
+    </script>
+
+    <!-- 하단 이미지 -->
+    <div class="bottom-image">
+        <img src="https://i.postimg.cc/7ZCYKvNB/image.png" alt="하단 이미지">
+    </div>
+</body>
+</html>
+
+
+
+
